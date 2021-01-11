@@ -51,12 +51,13 @@ function App() {
             </select>
 
             {/* Radio Buttons */}
-            <form name="coinCalcForm" id="test">
+            <form name="coinCalcForm">
                 <input type="radio" name="coinCalc" onclick={radioChecked} value="MarketCap" id="MktCapButton" />
                 Market Cap <br />
                 <input type="radio" name="coinCalc" onclick={radioChecked} value="CurrentPrice" id="ATHButton" />
                 Coin Price
             </form>
+
             {/* Market Cap Div -- Add display none style until radio button checked*/}
             <div name="coinCalcForm" id="MarketCapDiv">
                 <h2>Market Cap</h2>
