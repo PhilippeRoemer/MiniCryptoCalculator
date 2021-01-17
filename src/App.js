@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./App.css";
+import Coin from "./components/Coin";
+import Radio from "./components/Radio";
 
 function App() {
     const [coins, setCoins] = useState([]);
@@ -31,10 +33,17 @@ function App() {
         //Total Current Price = Quantity * Current Price
     }
 
+    function currentCoinInfo() {
+        //Displays the current coin market price
+        const x = document.getElementById("crypto").selectedIndex;
+        const y = document.getElementById("crypto").options;
+        document.getElementById("coinInfo").innerHTML = y[x].text;
+    }
+
     return (
         <div className="App">
             <p>Select a cryptocurrency</p>
-            <select id="crypto" className="cryptoCurrency">
+            <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
                 {coins.map((post) => (
                     <option
                         value={post.current_price}
@@ -67,6 +76,7 @@ function App() {
                     At ___, the crypto market cap for ___ would be ___ <span id="MktCapTotal"></span>
                 </p>
             </div>
+
             {/* Coin Price Dive -- Add display none style until radio button checked*/}
             <div name="coinCalcForm" id="ATHdiv">
                 <h2>Coin Price</h2>
@@ -75,6 +85,10 @@ function App() {
                 <p>
                     The current price of ___ ___ is ___ <span id="CoinPriceTotal"></span>
                 </p>
+            </div>
+            <div>
+                <h1>Current Curreny Info</h1>
+                <p id="coinInfo"></p>
             </div>
         </div>
     );
