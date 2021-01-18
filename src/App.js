@@ -34,11 +34,15 @@ function App() {
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
         const currentPrice = document.getElementById("crypto").value;
+
         const athValue = coinData[index].dataset.ath;
         const marketCap = coinData[index].dataset.marketcap;
         const coinImage = coinData[index].dataset.coinimage;
         const coinName = coinData[index].text;
-        document.getElementById("coinInfo").innerHTML = "<td><img src=" + coinImage + "/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
+
+        document.getElementById("coinInfoTitle").innerHTML = "Current Crypto Info";
+        document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>24H Change</th><th>ATH</th>        <th>Market Cap</th>";
+        document.getElementById("coinInfoData").innerHTML = "<td><img src=" + coinImage + "/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
     }
 
     return (
@@ -84,17 +88,10 @@ function App() {
                 </p>
             </div>
             <div>
-                <h1>Current Crypto Info</h1>
+                <h1 id="coinInfoTitle"></h1>
                 <table>
-                    <tr>
-                        <th></th>
-                        <th>Coin</th>
-                        <th>Current Price</th>
-                        <th>24H Change</th>
-                        <th>ATH</th>
-                        <th>Market Cap</th>
-                    </tr>
-                    <tr id="coinInfo"></tr>
+                    <tr id="coinInfoHeaders"></tr>
+                    <tr id="coinInfoData"></tr>
                 </table>
             </div>
         </div>
