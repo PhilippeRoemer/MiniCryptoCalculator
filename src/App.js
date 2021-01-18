@@ -1,17 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import "./App.css";
-import Coin from "./components/Coin";
-import Radio from "./components/Radio";
 
 function App() {
     const [coins, setCoins] = useState([]);
 
     useEffect(() => {
         axios
-            .get(
-                "https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin%2C%20ethereum%2C%20iota%2C%20xrp%2C%20litecoin%2C%20monero%2C%20stellar%2C%20nano%2C%20chainlink&order=market_cap_desc&per_page=50&page=1&sparkline=false"
-            )
+            .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin%2C%20ethereum%2C%20iota%2C%20xrp%2C%20litecoin%2C%20monero%2C%20stellar%2C%20nano%2C%20chainlink&order=market_cap_desc&per_page=50&page=1&sparkline=false")
             .then((res) => {
                 setCoins(res.data);
                 console.log(res.data);
@@ -35,25 +31,26 @@ function App() {
 
     function currentCoinInfo() {
         //Displays the current coin market price
-        const x = document.getElementById("crypto").selectedIndex;
-        const y = document.getElementById("crypto").options;
-        document.getElementById("coinInfo").innerHTML = y[x].text;
+        const index = document.getElementById("crypto").selectedIndex;
+        const coinData = document.getElementById("crypto").options;
+        const currentPrice = document.getElementById("crypto").value;
+        const athValue = coinData[index].dataset.ath;
+        const marketCap = coinData[index].dataset.marketcap;
+        const coinImage = coinData[index].dataset.coinimage;
+        const coinName = coinData[index].text;
+        document.getElementById("coinInfo").innerHTML = "<td><img src=" + coinImage + "/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
     }
 
     return (
         <div className="App">
             <p>Select a cryptocurrency</p>
             <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
+                <option disabled selected value>
+                    {" "}
+                    -- select a coin --{" "}
+                </option>
                 {coins.map((post) => (
-                    <option
-                        value={post.current_price}
-                        data-ath={post.ath}
-                        data-athdate={post.ath_date}
-                        data-coinimage={post.image}
-                        data-marketcap={post.market_cap}
-                        data-pricechange={post.price_change_24h}
-                        data-pricechangepercent={post.price_change_percentage_24h}
-                    >
+                    <option value={post.current_price} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
                         {post.name}
                     </option>
                 ))}
@@ -87,8 +84,18 @@ function App() {
                 </p>
             </div>
             <div>
-                <h1>Current Curreny Info</h1>
-                <p id="coinInfo"></p>
+                <h1>Current Crypto Info</h1>
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Coin</th>
+                        <th>Current Price</th>
+                        <th>24H Change</th>
+                        <th>ATH</th>
+                        <th>Market Cap</th>
+                    </tr>
+                    <tr id="coinInfo"></tr>
+                </table>
             </div>
         </div>
     );
