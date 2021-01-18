@@ -42,11 +42,11 @@ function App() {
 
         document.getElementById("coinInfoTitle").innerHTML = "Current Crypto Info";
         document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>24H Change</th><th>ATH</th>        <th>Market Cap</th>";
-        document.getElementById("coinInfoData").innerHTML = "<td><img src=" + coinImage + "/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
+        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
     }
 
     return (
-        <div className="App">
+        <div className="container">
             <p>Select a cryptocurrency</p>
             <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
                 <option disabled selected value>
@@ -88,7 +88,7 @@ function App() {
                 </p>
             </div>
             <div>
-                <h1 id="coinInfoTitle"></h1>
+                <h1 id="coinInfoTitle" class="coinTitle"></h1>
                 <table>
                     <tr id="coinInfoHeaders"></tr>
                     <tr id="coinInfoData"></tr>
