@@ -22,6 +22,13 @@ function App() {
     function generateMktCap() {
         //Generates the marketcap based off the price entered
         //Market Cap = Circulating Supply * Price
+        const index = document.getElementById("crypto").selectedIndex;
+        const coinData = document.getElementById("crypto").options;
+        const coinPrice = document.getElementById("price").value;
+        const circulatingSupply = coinData[index].dataset.circulatingsupply;
+        const generatedMarketCap = coinPrice * circulatingSupply;
+
+        document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
     function generateCurrentPrice() {
@@ -43,6 +50,7 @@ function App() {
         document.getElementById("coinInfoTitle").innerHTML = "Current Crypto Info";
         document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>24H Change</th><th>ATH</th>        <th>Market Cap</th>";
         document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
+        document.getElementById("coinName").innerHTML = coinName;
     }
 
     return (
@@ -54,7 +62,16 @@ function App() {
                     -- select a coin --{" "}
                 </option>
                 {coins.map((post) => (
-                    <option value={post.current_price} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
+                    <option
+                        value={post.current_price}
+                        data-circulatingsupply={post.circulating_supply}
+                        data-ath={post.ath}
+                        data-athdate={post.ath_date}
+                        data-coinimage={post.image}
+                        data-marketcap={post.market_cap}
+                        data-pricechange={post.price_change_24h}
+                        data-pricechangepercent={post.price_change_percentage_24h}
+                    >
                         {post.name}
                     </option>
                 ))}
@@ -67,26 +84,23 @@ function App() {
                 <input type="radio" name="coinCalc" onclick={radioChecked} value="CurrentPrice" id="ATHButton" />
                 Coin Price
             </form>
-
+            <hr></hr>
             {/* Market Cap Div -- Add display none style until radio button checked*/}
             <div name="coinCalcForm" id="MarketCapDiv">
                 <h2>Market Cap</h2>
-                <input type="text" placeholder="Price" id="price" />
-                <input type="submit" value="Submit" onclick={generateMktCap} />
                 <p>
-                    At ___, the crypto market cap for ___ would be ___ <span id="MktCapTotal"></span>
+                    If <span id="coinName"></span> is $<input type="text" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be <span id="MktCapTotal"></span>
                 </p>
             </div>
-
+            <hr></hr>
             {/* Coin Price Dive -- Add display none style until radio button checked*/}
             <div name="coinCalcForm" id="ATHdiv">
                 <h2>Coin Price</h2>
-                <input type="text" placeholder="Crypto Amount" />
-                <input type="submit" value="Submit" onclick={generateCurrentPrice} />
                 <p>
-                    The current price of ___ ___ is ___ <span id="CoinPriceTotal"></span>
+                    The current price of <input type="text" placeholder="Crypto Amount" /> "Bitcoin" is ___ <span id="CoinPriceTotal"></span>
                 </p>
             </div>
+            <hr></hr>
             <div>
                 <h1 id="coinInfoTitle" class="coinTitle"></h1>
                 <table>
