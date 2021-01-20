@@ -26,7 +26,6 @@ p {
 
 th {
     font-size: 20px;
-    color: white;
 }
 
 td {
@@ -34,10 +33,9 @@ td {
 }
 
 .container {
-    background-color: #1f2833;
+    background-color: #fff;
     border-color: #45a29e;
     border-style: solid;
-    color: #c5c6c7;
     padding: 25px;
     margin: auto;
     width: 800px;
@@ -45,10 +43,13 @@ td {
     border-radius: 25px;
 }
 
+.selectCrypto {
+    text-align: center;
+}
+
 /* Coin Table */
 .coinTitle {
     text-align: center;
-    color: #66fcf1;
 }
 
 table {
@@ -62,12 +63,4 @@ table {
 
 tr {
     height: 25px;
-}
-
-.red {
-    color: #f00606;
-}
-
-.green {
-    color: #11d811;
 }

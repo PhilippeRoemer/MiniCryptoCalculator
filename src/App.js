@@ -15,10 +15,6 @@ function App() {
             .catch((error) => console.log(error));
     }, []);
 
-    function radioChecked() {
-        //Displays div depending on which option is slected
-    }
-
     function generateMktCap() {
         //Generates the marketcap based off the price entered
         //Market Cap = Circulating Supply * Price
@@ -34,6 +30,13 @@ function App() {
     function generateCurrentPrice() {
         //Generates the current value of the amount of coins entered
         //Total Current Price = Quantity * Current Price
+        const index = document.getElementById("crypto").selectedIndex;
+        const coinData = document.getElementById("crypto").options;
+        const currentPrice = document.getElementById("crypto").value;
+        const quantity = document.getElementById("cryptoAmount").value;
+        const coinPriceTotal = currentPrice * quantity;
+
+        document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal;
     }
 
     function currentCoinInfo() {
@@ -41,55 +44,65 @@ function App() {
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
         const currentPrice = document.getElementById("crypto").value;
-
         const athValue = coinData[index].dataset.ath;
         const marketCap = coinData[index].dataset.marketcap;
         const coinImage = coinData[index].dataset.coinimage;
         const coinName = coinData[index].text;
 
-        document.getElementById("coinInfoTitle").innerHTML = "Current Crypto Info";
-        document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>24H Change</th><th>ATH</th>        <th>Market Cap</th>";
-        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
+        document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>ATH</th><th>Market Cap</th>";
+        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
         document.getElementById("coinName").innerHTML = coinName;
     }
 
     return (
         <div className="container">
-            <p>Select a cryptocurrency</p>
-            <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
-                <option disabled selected value>
-                    {" "}
-                    -- select a coin --{" "}
-                </option>
-                {coins.map((post) => (
-                    <option
-                        value={post.current_price}
-                        data-circulatingsupply={post.circulating_supply}
-                        data-ath={post.ath}
-                        data-athdate={post.ath_date}
-                        data-coinimage={post.image}
-                        data-marketcap={post.market_cap}
-                        data-pricechange={post.price_change_24h}
-                        data-pricechangepercent={post.price_change_percentage_24h}
-                    >
-                        {post.name}
+            <div className="selectCrypto">
+                <p>Select a cryptocurrency</p>
+                <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
+                    <option disabled selected value>
+                        {" "}
+                        -- select a coin --{" "}
                     </option>
-                ))}
-            </select>
-
-            {/* Radio Buttons */}
-            <form name="coinCalcForm">
-                <input type="radio" name="coinCalc" onclick={radioChecked} value="MarketCap" id="MktCapButton" />
-                Market Cap <br />
-                <input type="radio" name="coinCalc" onclick={radioChecked} value="CurrentPrice" id="ATHButton" />
-                Coin Price
-            </form>
+                    {coins.map((post) => (
+                        <option
+                            value={post.current_price}
+                            data-circulatingsupply={post.circulating_supply}
+                            data-ath={post.ath}
+                            data-athdate={post.ath_date}
+                            data-coinimage={post.image}
+                            data-marketcap={post.market_cap}
+                            data-pricechange={post.price_change_24h}
+                            data-pricechangepercent={post.price_change_percentage_24h}
+                        >
+                            {post.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            <div>
+                <h1 class="coinTitle">Current Crypto Info</h1>
+                <table>
+                    <tr id="coinInfoHeaders">
+                        <th></th>
+                        <th>Coin</th>
+                        <th>Current Price</th>
+                        <th>ATH</th> <th>Market Cap</th>
+                    </tr>
+                    <tr id="coinInfoData">
+                        <td></td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </table>
+            </div>
             <hr></hr>
             {/* Market Cap Div -- Add display none style until radio button checked*/}
             <div name="coinCalcForm" id="MarketCapDiv">
                 <h2>Market Cap</h2>
                 <p>
-                    If <span id="coinName"></span> is $<input type="text" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be <span id="MktCapTotal"></span>
+                    If <span id="coinName"></span> is $<input type="text" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be <span id="MktCapTotal">---</span>
                 </p>
             </div>
             <hr></hr>
@@ -97,17 +110,10 @@ function App() {
             <div name="coinCalcForm" id="ATHdiv">
                 <h2>Coin Price</h2>
                 <p>
-                    The current price of <input type="text" placeholder="Crypto Amount" /> "Bitcoin" is ___ <span id="CoinPriceTotal"></span>
+                    The current price of <span id="coinName1"></span> <input type="text" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} /> is <span id="CoinPriceTotal">---</span>
                 </p>
             </div>
             <hr></hr>
-            <div>
-                <h1 id="coinInfoTitle" class="coinTitle"></h1>
-                <table>
-                    <tr id="coinInfoHeaders"></tr>
-                    <tr id="coinInfoData"></tr>
-                </table>
-            </div>
         </div>
     );
 }
