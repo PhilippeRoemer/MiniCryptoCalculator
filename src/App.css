@@ -43,10 +43,31 @@ td {
     border-radius: 25px;
 }
 
-.selectCrypto {
+.selectCryptoTitle {
     text-align: center;
 }
 
+.selectCrypto {
+    width: 150x;
+    padding: 15px 65px;
+    font-size: 16px;
+    font-family: "Titillium Web", sans-serif;
+    text-align: center;
+}
+
+.marketCapInput {
+    text-align: center;
+    width: 80px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+.coinAmountInput {
+    text-align: center;
+    width: 110px;
+    padding: 5px;
+    font-size: 16px;
+}
 /* Coin Table */
 .coinTitle {
     text-align: center;
