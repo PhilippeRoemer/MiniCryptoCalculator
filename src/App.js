@@ -24,7 +24,11 @@ function App() {
         const circulatingSupply = coinData[index].dataset.circulatingsupply;
         const generatedMarketCap = coinPrice * circulatingSupply;
 
-        document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        if (index <= 0) {
+            alert("Please select a cryptocurreny");
+        } else {
+            document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
     }
 
     function generateCurrentPrice() {
@@ -36,7 +40,11 @@ function App() {
         const quantity = document.getElementById("cryptoAmount").value;
         const coinPriceTotal = currentPrice * quantity;
 
-        document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal;
+        if (index <= 0) {
+            alert("Please select a cryptocurreny");
+        } else {
+            document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal;
+        }
     }
 
     function currentCoinInfo() {
@@ -56,9 +64,9 @@ function App() {
 
     return (
         <div className="container">
-            <div className="selectCrypto">
+            <div className="selectCryptoTitle">
                 <p>Select a cryptocurrency</p>
-                <select id="crypto" className="cryptoCurrency" onChange={currentCoinInfo}>
+                <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
                     <option disabled selected value>
                         {" "}
                         -- select a coin --{" "}
@@ -99,18 +107,32 @@ function App() {
             </div>
             <hr></hr>
             {/* Market Cap Div -- Add display none style until radio button checked*/}
-            <div name="coinCalcForm" id="MarketCapDiv">
+            <div className="marketCapDiv">
                 <h2>Market Cap</h2>
                 <p>
-                    If <span id="coinName"></span> is $<input type="text" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be <span id="MktCapTotal">---</span>
+                    If{" "}
+                    <span id="coinName" className="highlight">
+                        ---
+                    </span>{" "}
+                    is $<input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be{" "}
+                    <span id="MktCapTotal" className="highlight">
+                        ---
+                    </span>
                 </p>
             </div>
             <hr></hr>
             {/* Coin Price Dive -- Add display none style until radio button checked*/}
-            <div name="coinCalcForm" id="ATHdiv">
+            <div className="coinPriceDiv">
                 <h2>Coin Price</h2>
                 <p>
-                    The current price of <span id="coinName1"></span> <input type="text" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} /> is <span id="CoinPriceTotal">---</span>
+                    The current price of <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />{" "}
+                    <span id="coinName" className="highlight">
+                        ---
+                    </span>{" "}
+                    is{" "}
+                    <span id="CoinPriceTotal" className="highlight">
+                        ---
+                    </span>
                 </p>
             </div>
             <hr></hr>
