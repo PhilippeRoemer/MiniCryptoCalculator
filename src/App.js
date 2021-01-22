@@ -44,7 +44,7 @@ function App() {
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal;
+            document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -52,15 +52,16 @@ function App() {
         //Displays the current coin market price
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
-        const currentPrice = document.getElementById("crypto").value;
+        const currentPrice = document.getElementById("crypto").value * 1;
         const athValue = coinData[index].dataset.ath;
-        const marketCap = coinData[index].dataset.marketcap;
+        const marketCap = coinData[index].dataset.marketcap * 1;
         const coinImage = coinData[index].dataset.coinimage;
         const coinName = coinData[index].text;
         const coinName2 = coinData[index].text;
 
         document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>ATH</th><th>Market Cap</th>";
-        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
+        document.getElementById("coinInfoData").innerHTML =
+            "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>$" + currentPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + athValue + "</td><td>$" + marketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td>";
         document.getElementById("coinName").innerHTML = coinName;
         document.getElementById("coinName2").innerHTML = coinName2;
     }
@@ -69,7 +70,6 @@ function App() {
         <div className="container">
             <img src={Logo} class="logo" />
             <div className="selectCryptoTitle">
-                <p>Select a cryptocurrency</p>
                 <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
                     <option disabled selected value>
                         {" "}
@@ -91,8 +91,8 @@ function App() {
                     ))}
                 </select>
             </div>
+            <br></br>
             <div>
-                <h1 class="coinTitle">Current Crypto Info</h1>
                 <table>
                     <tr id="coinInfoHeaders">
                         <th></th>
@@ -109,10 +109,8 @@ function App() {
                     </tr>
                 </table>
             </div>
-            <hr></hr>
             {/* Market Cap Div */}
             <div className="marketCapDiv">
-                <h2>Market Cap</h2>
                 <p>
                     If{" "}
                     <span id="coinName" className="highlight">
@@ -120,14 +118,12 @@ function App() {
                     </span>{" "}
                     is $<input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be{" "}
                     <span id="MktCapTotal" className="highlight">
-                        ---
+                        $0.00
                     </span>
                 </p>
             </div>
-            <hr></hr>
             {/* Coin Price Div */}
             <div className="coinPriceDiv">
-                <h2>Coin Price</h2>
                 <p>
                     <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />{" "}
                     <span id="coinName2" className="highlight">
@@ -137,7 +133,7 @@ function App() {
                     is currently worth{" "}
                     <span id="CoinPriceTotal" className="highlight">
                         {" "}
-                        ---{" "}
+                        $0.00{" "}
                     </span>
                 </p>
             </div>
