@@ -116,7 +116,7 @@ function App() {
                     <span id="coinName" className="highlight">
                         ---
                     </span>{" "}
-                    is <input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} /> dollars, the crypto market cap would be{" "}
+                    is $<input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be{" "}
                     <span id="MktCapTotal" className="highlight">
                         $0.00
                     </span>
