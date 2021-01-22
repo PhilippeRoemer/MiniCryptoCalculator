@@ -43,6 +43,12 @@ td {
     border-radius: 25px;
 }
 
+.logo {
+    display: block;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
 .selectCryptoTitle {
     text-align: center;
 }
@@ -77,7 +83,7 @@ td {
 
 .highlight {
     font-weight: bold;
-    color: #1034a8;
+    color: #3162ff;
 }
 /* Coin Table */
 .coinTitle {
