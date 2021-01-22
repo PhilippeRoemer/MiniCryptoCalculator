@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import Logo from "./CC_Logo.png";
 import "./App.css";
 
 function App() {
@@ -27,7 +28,7 @@ function App() {
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -56,14 +57,17 @@ function App() {
         const marketCap = coinData[index].dataset.marketcap;
         const coinImage = coinData[index].dataset.coinimage;
         const coinName = coinData[index].text;
+        const coinName2 = coinData[index].text;
 
         document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>ATH</th><th>Market Cap</th>";
         document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>" + currentPrice + "</td><td>" + athValue + "</td><td>" + marketCap + "</td>";
         document.getElementById("coinName").innerHTML = coinName;
+        document.getElementById("coinName2").innerHTML = coinName2;
     }
 
     return (
         <div className="container">
+            <img src={Logo} class="logo" />
             <div className="selectCryptoTitle">
                 <p>Select a cryptocurrency</p>
                 <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
@@ -106,7 +110,7 @@ function App() {
                 </table>
             </div>
             <hr></hr>
-            {/* Market Cap Div -- Add display none style until radio button checked*/}
+            {/* Market Cap Div */}
             <div className="marketCapDiv">
                 <h2>Market Cap</h2>
                 <p>
@@ -121,21 +125,22 @@ function App() {
                 </p>
             </div>
             <hr></hr>
-            {/* Coin Price Dive -- Add display none style until radio button checked*/}
+            {/* Coin Price Div */}
             <div className="coinPriceDiv">
                 <h2>Coin Price</h2>
                 <p>
-                    The current price of <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />{" "}
-                    <span id="coinName" className="highlight">
-                        ---
+                    <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />{" "}
+                    <span id="coinName2" className="highlight">
+                        {" "}
+                        ---{" "}
                     </span>{" "}
-                    is{" "}
+                    is currently worth{" "}
                     <span id="CoinPriceTotal" className="highlight">
-                        ---
+                        {" "}
+                        ---{" "}
                     </span>
                 </p>
             </div>
-            <hr></hr>
         </div>
     );
 }
