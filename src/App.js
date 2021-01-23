@@ -53,15 +53,14 @@ function App() {
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
         const currentPrice = document.getElementById("crypto").value * 1;
-        const athValue = coinData[index].dataset.ath;
+        const athValue = coinData[index].dataset.ath * 1;
         const marketCap = coinData[index].dataset.marketcap * 1;
         const coinImage = coinData[index].dataset.coinimage;
         const coinName = coinData[index].text;
         const coinName2 = coinData[index].text;
 
         document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>ATH</th><th>Market Cap</th>";
-        document.getElementById("coinInfoData").innerHTML =
-            "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>$" + currentPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + athValue + "</td><td>$" + marketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td>";
+        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>$" + currentPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + athValue.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + marketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td>";
         document.getElementById("coinName").innerHTML = coinName;
         document.getElementById("coinName2").innerHTML = coinName2;
     }
@@ -76,16 +75,7 @@ function App() {
                         -- select a coin --{" "}
                     </option>
                     {coins.map((post) => (
-                        <option
-                            value={post.current_price}
-                            data-circulatingsupply={post.circulating_supply}
-                            data-ath={post.ath}
-                            data-athdate={post.ath_date}
-                            data-coinimage={post.image}
-                            data-marketcap={post.market_cap}
-                            data-pricechange={post.price_change_24h}
-                            data-pricechangepercent={post.price_change_percentage_24h}
-                        >
+                        <option value={post.current_price} data-circulatingsupply={post.circulating_supply} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
                             {post.name}
                         </option>
                     ))}
