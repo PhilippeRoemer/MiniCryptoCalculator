@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Logo from "./CC_Logo.png";
+import Coin from "./components/Coin";
 import "./App.css";
 
 function App() {
@@ -68,62 +69,58 @@ function App() {
     return (
         <div className="container">
             <img src={Logo} class="logo" />
-            <div className="selectCryptoTitle">
-                <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
-                    <option disabled selected value>
-                        {" "}
-                        -- select a coin --{" "}
-                    </option>
-                    {coins.map((post) => (
-                        <option value={post.current_price} data-circulatingsupply={post.circulating_supply} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
-                            {post.name}
-                        </option>
-                    ))}
-                </select>
-            </div>
+            <h1 className="title">Current Crypto Market</h1>
+
             <br></br>
             <div>
                 <table>
-                    <tr id="coinInfoHeaders">
+                    <tr>
                         <th></th>
                         <th>Coin</th>
                         <th>Current Price</th>
-                        <th>ATH</th> <th>Market Cap</th>
+                        <th>24H Change</th>
+                        <th>ATH</th>
+                        <th>Market Cap</th>
                     </tr>
-                    <tr id="coinInfoData">
-                        <td></td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    </tr>
+                    {coins.map((coin) => {
+                        return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} />;
+                    })}
                 </table>
             </div>
+            {/* Select a coin */}
+            <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
+                <option disabled selected value>
+                    {" "}
+                    -- select a coin --{" "}
+                </option>
+                {coins.map((post) => (
+                    <option value={post.current_price} data-circulatingsupply={post.circulating_supply} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
+                        {post.name}
+                    </option>
+                ))}
+            </select>
+
             {/* Market Cap Div */}
+            <h1 className="title">Calculate the Market Cap</h1>
             <div className="marketCapDiv">
+                <input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} />
+                <p className="marketCapInput2">X Circulating Supply</p>
                 <p>
-                    If{" "}
-                    <span id="coinName" className="highlight">
-                        ---
-                    </span>{" "}
-                    is $<input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} /> the crypto market cap would be{" "}
+                    Market Cap ={" "}
                     <span id="MktCapTotal" className="highlight">
                         $0.00
                     </span>
                 </p>
             </div>
             {/* Coin Price Div */}
+            <h1 className="title">Calculate the Coin Value</h1>
             <div className="coinPriceDiv">
+                <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
+                <p className="coinAmountInput2">X Current Price (Current Price)</p>
                 <p>
-                    <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />{" "}
-                    <span id="coinName2" className="highlight">
-                        {" "}
-                        ---{" "}
-                    </span>{" "}
-                    is currently worth{" "}
+                    Coin Value ={" "}
                     <span id="CoinPriceTotal" className="highlight">
-                        {" "}
-                        $0.00{" "}
+                        $0.00
                     </span>
                 </p>
             </div>
