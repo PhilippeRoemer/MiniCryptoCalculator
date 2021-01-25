@@ -4,7 +4,7 @@
 }
 
 body {
-    background-color: #00171f;
+    background-color: #0b0c10;
 }
 
 h1,
@@ -18,24 +18,16 @@ a,
 td,
 th {
     font-family: "Titillium Web", sans-serif;
-    color: #00171f;
+    color: #c5c6c7;
 }
 
 p {
     font-size: 18px;
 }
 
-th {
-    font-size: 20px;
-}
-
-td {
-    text-align: center;
-}
-
 .container {
-    background-color: #fff;
-    border-color: #007ea7;
+    background-color: #1f2833;
+    border-color: #45a29e;
     border-style: solid;
     padding: 25px;
     margin: auto;
@@ -51,8 +43,36 @@ td {
     width: 130px;
 }
 
-.selectCryptoTitle {
+/* Coin Table */
+.title {
     text-align: center;
+    color: #66fcf1;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    font-size: 20px;
+    color: white;
+}
+
+tr {
+    height: 45px;
+}
+
+td {
+    text-align: center;
+}
+
+.coin-img {
+    width: 30px;
+}
+
+tr:nth-child(even) {
+    background: #45a29d1e;
 }
 
 .selectCrypto {
@@ -61,16 +81,19 @@ td {
     font-size: 16px;
     font-family: "Titillium Web", sans-serif;
     text-align: center;
-    -webkit-box-shadow: 0px 0px 4px 3px rgba(0, 126, 167, 0.5);
-    box-shadow: 0px 0px 4px 3px rgba(0, 126, 167, 0.5);
+    margin: auto;
+    display: block;
 }
 
 .marketCapDiv {
     margin-top: 15px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .coinPriceDiv {
     margin-top: 15px;
+    text-align: center;
 }
 
 .marketCapInput {
@@ -80,6 +103,11 @@ td {
     font-size: 16px;
 }
 
+.marketCapInput2 {
+    padding: 5px;
+    display: inline-block;
+}
+
 .coinAmountInput {
     text-align: center;
     width: 110px;
@@ -87,24 +115,12 @@ td {
     font-size: 16px;
 }
 
+.coinAmountInput2 {
+    padding: 5px;
+    display: inline-block;
+}
+
 .highlight {
     font-weight: bold;
-    color: #00a8e8;
-}
-/* Coin Table */
-.coinTitle {
-    text-align: center;
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-.coinImg {
-    height: 30px;
-    width: 30px;
-}
-
-tr {
-    height: 25px;
+    color: #66fcf1;
 }
