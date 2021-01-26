@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/MiniCryptoCalculator/static/css/main.2df2409e.chunk.css",
-    "main.js": "/MiniCryptoCalculator/static/js/main.9267997e.chunk.js",
-    "main.js.map": "/MiniCryptoCalculator/static/js/main.9267997e.chunk.js.map",
+    "main.css": "/MiniCryptoCalculator/static/css/main.fd566de2.chunk.css",
+    "main.js": "/MiniCryptoCalculator/static/js/main.f17f8230.chunk.js",
+    "main.js.map": "/MiniCryptoCalculator/static/js/main.f17f8230.chunk.js.map",
     "runtime-main.js": "/MiniCryptoCalculator/static/js/runtime-main.1b3dd9bd.js",
     "runtime-main.js.map": "/MiniCryptoCalculator/static/js/runtime-main.1b3dd9bd.js.map",
     "static/js/2.bfe75202.chunk.js": "/MiniCryptoCalculator/static/js/2.bfe75202.chunk.js",
     "static/js/2.bfe75202.chunk.js.map": "/MiniCryptoCalculator/static/js/2.bfe75202.chunk.js.map",
     "index.html": "/MiniCryptoCalculator/index.html",
-    "static/css/main.2df2409e.chunk.css.map": "/MiniCryptoCalculator/static/css/main.2df2409e.chunk.css.map",
+    "static/css/main.fd566de2.chunk.css.map": "/MiniCryptoCalculator/static/css/main.fd566de2.chunk.css.map",
     "static/js/2.bfe75202.chunk.js.LICENSE.txt": "/MiniCryptoCalculator/static/js/2.bfe75202.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.1b3dd9bd.js",
     "static/js/2.bfe75202.chunk.js",
-    "static/css/main.2df2409e.chunk.css",
-    "static/js/main.9267997e.chunk.js"
+    "static/css/main.fd566de2.chunk.css",
+    "static/js/main.f17f8230.chunk.js"
   ]
 }
