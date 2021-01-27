@@ -49,28 +49,10 @@ function App() {
         }
     }
 
-    function currentCoinInfo() {
-        //Displays the current coin market price
-        const index = document.getElementById("crypto").selectedIndex;
-        const coinData = document.getElementById("crypto").options;
-        const currentPrice = document.getElementById("crypto").value * 1;
-        const athValue = coinData[index].dataset.ath * 1;
-        const marketCap = coinData[index].dataset.marketcap * 1;
-        const coinImage = coinData[index].dataset.coinimage;
-        const coinName = coinData[index].text;
-        const coinName2 = coinData[index].text;
-
-        document.getElementById("coinInfoHeaders").innerHTML = "<th></th><th>Coin</th><th>Current Price</th><th>ATH</th><th>Market Cap</th>";
-        document.getElementById("coinInfoData").innerHTML = "<td><img class='coinImg' src='" + coinImage + "'/>   </td><td>" + coinName + "</td><td>$" + currentPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + athValue.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td><td>$" + marketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,") + "</td>";
-        document.getElementById("coinName").innerHTML = coinName;
-        document.getElementById("coinName2").innerHTML = coinName2;
-    }
-
     return (
         <div className="container">
             <img src={Logo} class="logo" />
             <h1 className="title">Current Crypto Market</h1>
-
             <br></br>
             <div>
                 <table>
@@ -78,8 +60,6 @@ function App() {
                         <th></th>
                         <th>Coin</th>
                         <th>Current Price</th>
-                        <th>24H Change</th>
-                        <th>ATH</th>
                         <th>Market Cap</th>
                     </tr>
                     {coins.map((coin) => {
@@ -88,7 +68,7 @@ function App() {
                 </table>
             </div>
             {/* Select a coin */}
-            <select id="crypto" className="selectCrypto" onChange={currentCoinInfo}>
+            <select id="crypto" className="selectCrypto">
                 <option disabled selected value>
                     {" "}
                     -- select a coin --{" "}
@@ -101,11 +81,12 @@ function App() {
             </select>
 
             {/* Market Cap Div */}
-            <h1 className="title">Calculate the Market Cap</h1>
+            <h2 className="title">Calculate the Market Cap</h2>
             <div className="marketCapDiv">
-                <input type="text" className="marketCapInput" placeholder="Insert Price" id="price" onChange={generateMktCap} />
+                <label for="Price">Price: </label>
+                <input type="text" className="marketCapInput" name="Price" placeholder="Insert Price" id="price" onChange={generateMktCap} />
                 <p className="marketCapInput2">X Circulating Supply</p>
-                <p>
+                <p className="bold">
                     Market Cap ={" "}
                     <span id="MktCapTotal" className="highlight">
                         $0.00
@@ -113,11 +94,12 @@ function App() {
                 </p>
             </div>
             {/* Coin Price Div */}
-            <h1 className="title">Calculate the Coin Value</h1>
+            <h2 className="title">Calculate the Coin Value</h2>
             <div className="coinPriceDiv">
-                <input type="text" className="coinAmountInput" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
-                <p className="coinAmountInput2">X Current Price (Current Price)</p>
-                <p>
+                <label for="Quantity">Quantity: </label>
+                <input type="text" className="coinAmountInput" name="Quantity" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
+                <p className="coinAmountInput2">X Current Price</p>
+                <p className="bold">
                     Coin Value ={" "}
                     <span id="CoinPriceTotal" className="highlight">
                         $0.00
