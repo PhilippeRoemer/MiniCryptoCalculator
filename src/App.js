@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Logo from "./CC_Logo.png";
 import Coin from "./components/Coin";
+import CoinData from "./components/CoinData";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
 
     useEffect(() => {
         axios
-            .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin%2C%20ethereum%2C%20iota%2C%20xrp%2C%20litecoin%2C%20monero%2C%20stellar%2C%20nano%2C%20chainlink&order=market_cap_desc&per_page=50&page=1&sparkline=false")
+            .get("https://api.coingecko.com/api/v3/coins/markets?vs_currency=USD&ids=bitcoin%2C%20ethereum%2C%20iota%2C%20xrp%2C%20litecoin%2C%20monero%2C%20stellar%2C%20nano%2C%20chainlink&order=market_cap_desc&per_page=50&page=1&sparkline=true")
             .then((res) => {
                 setCoins(res.data);
                 console.log(res.data);
@@ -63,7 +64,7 @@ function App() {
                         <th>Market Cap</th>
                     </tr>
                     {coins.map((coin) => {
-                        return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} />;
+                        return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} />;
                     })}
                 </table>
             </div>
@@ -74,7 +75,16 @@ function App() {
                     -- select a coin --{" "}
                 </option>
                 {coins.map((post) => (
-                    <option value={post.current_price} data-circulatingsupply={post.circulating_supply} data-ath={post.ath} data-athdate={post.ath_date} data-coinimage={post.image} data-marketcap={post.market_cap} data-pricechange={post.price_change_24h} data-pricechangepercent={post.price_change_percentage_24h}>
+                    <option
+                        value={post.current_price}
+                        data-circulatingsupply={post.circulating_supply}
+                        data-ath={post.ath}
+                        data-athdate={post.ath_date}
+                        data-coinimage={post.image}
+                        data-marketcap={post.market_cap}
+                        data-pricechange={post.price_change_24h}
+                        data-pricechangepercent={post.price_change_percentage_24h}
+                    >
                         {post.name}
                     </option>
                 ))}
