@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Logo from "./CC_Logo.png";
 import Coin from "./components/Coin";
-import CoinData from "./components/CoinData";
 import "./App.css";
 
 function App() {
@@ -68,6 +67,7 @@ function App() {
                     })}
                 </table>
             </div>
+
             {/* Select a coin */}
             <select id="crypto" className="selectCrypto">
                 <option disabled selected value>
@@ -103,6 +103,7 @@ function App() {
                     </span>
                 </p>
             </div>
+
             {/* Coin Price Div */}
             <h2 className="title">Calculate the Coin Value</h2>
             <div className="coinPriceDiv">

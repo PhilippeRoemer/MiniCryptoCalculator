@@ -33,6 +33,8 @@ label {
     padding: 10px;
     margin: auto;
     border-radius: 25px;
+    padding-bottom: 35px;
+    width: 345px;
 }
 
 .logo {
@@ -55,6 +57,7 @@ table {
 
 th {
     color: white;
+    font-size: 14px;
 }
 
 tr {
@@ -63,14 +66,15 @@ tr {
 
 td {
     text-align: center;
+    font-size: 15px;
+}
+
+.tdMktCp {
+    width: 150px;
 }
 
 .coin-img {
     width: 30px;
-}
-
-tr:nth-child(even) {
-    background: #45a29d1e;
 }
 
 .selectCrypto {
@@ -124,4 +128,32 @@ tr:nth-child(even) {
 .highlight {
     font-weight: bold;
     color: #66fcf1;
+}
+
+.additionalCoinData {
+    background-color: #b7b7b71c;
+}
+
+.red {
+    color: #d60a0a;
+}
+
+.green {
+    color: #0db50d;
+}
+
+.sparklineGraph {
+    width: 150px;
+    height: 50px;
+}
+
+.coinTitle {
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: #d4d4d41f;
+}
+
+.coinTitle:hover {
+    background-color: #45a29d1e;
+    cursor: pointer;
 }
