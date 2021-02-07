@@ -49,24 +49,39 @@ function App() {
         }
     }
 
+    function generateATH() {
+        //Generates the current value of the amount of coins entered
+        //Total Current Price = Quantity * Current Price
+        const index = document.getElementById("crypto").selectedIndex;
+        const coinData = document.getElementById("crypto").options;
+        const quantity = document.getElementById("cryptoAmountATH").value;
+        const coinATH = coinData[index].dataset.ath;
+        const coinATHtotal = coinATH * quantity;
+
+        if (index <= 0) {
+            alert("Please select a cryptocurreny");
+        } else {
+            document.getElementById("CoinATHtotal").innerHTML = "$" + coinATHtotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
+    }
+
     return (
         <div className="container">
             <img src={Logo} class="logo" />
             <h1 className="title">Current Crypto Market</h1>
             <br></br>
-            <div>
-                <table>
-                    <tr>
-                        <th></th>
-                        <th>Coin</th>
-                        <th>Current Price</th>
-                        <th>Market Cap</th>
-                    </tr>
-                    {coins.map((coin) => {
-                        return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} />;
-                    })}
-                </table>
-            </div>
+            {/* Coin Table */}
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Coin</th>
+                    <th>Current Price</th>
+                    <th>Market Cap</th>
+                </tr>
+                {coins.map((coin) => {
+                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} />;
+                })}
+            </table>
 
             {/* Select a coin */}
             <select id="crypto" className="selectCrypto">
@@ -113,6 +128,20 @@ function App() {
                 <p className="bold">
                     Coin Value ={" "}
                     <span id="CoinPriceTotal" className="highlight">
+                        $0.00
+                    </span>
+                </p>
+            </div>
+
+            {/* ATH Div */}
+            <h2 className="title">Calculate the ATH Value</h2>
+            <div className="coinPriceDiv">
+                <label for="QuantityATH">Quantity: </label>
+                <input type="text" className="coinAmountInput" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
+                <p className="coinAmountInput2">X ATH</p>
+                <p className="bold">
+                    ATH Value ={" "}
+                    <span id="CoinATHtotal" className="highlight">
                         $0.00
                     </span>
                 </p>
