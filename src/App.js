@@ -34,7 +34,7 @@ function App() {
     }
 
     function generateCurrentPrice() {
-        //Generates the current value of the amount of coins entered
+        //Generates the current coin value
         //Total Current Price = Quantity * Current Price
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
@@ -50,8 +50,8 @@ function App() {
     }
 
     function generateATH() {
-        //Generates the current value of the amount of coins entered
-        //Total Current Price = Quantity * Current Price
+        //Generates the current ATH value
+        //Total Current Price = Quantity * ATH
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
         const quantity = document.getElementById("cryptoAmountATH").value;
