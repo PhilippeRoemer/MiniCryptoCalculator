@@ -104,7 +104,12 @@ function App() {
                     </option>
                 ))}
             </select>
-
+            {/* Radio Buttons */}
+            <div>
+                <input type="radio" value="Male" name="gender" /> Market Cap
+                <input type="radio" value="Female" name="gender" /> Coin Value
+                <input type="radio" value="Other" name="gender" /> ATH
+            </div>
             {/* Market Cap Div */}
             <h2 className="title">Calculate the Market Cap</h2>
             <div className="marketCapDiv">
@@ -118,7 +123,6 @@ function App() {
                     </span>
                 </p>
             </div>
-
             {/* Coin Price Div */}
             <h2 className="title">Calculate the Coin Value</h2>
             <div className="coinPriceDiv">
@@ -132,7 +136,6 @@ function App() {
                     </span>
                 </p>
             </div>
-
             {/* ATH Div */}
             <h2 className="title">Calculate the ATH Value</h2>
             <div className="coinPriceDiv">
