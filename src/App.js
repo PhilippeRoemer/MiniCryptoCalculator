@@ -66,16 +66,6 @@ function App() {
         }
     }
 
-    function marketCapShow() {
-        document.getElementById("marketCapShowDiv").style.display = "block";
-    }
-    function valueShow() {
-        document.getElementById("valueShowDiv").style.display = "block";
-    }
-    function ATHShow() {
-        document.getElementById("ATHShowDiv").style.display = "block";
-    }
-
     function radioChecked() {
         var MktCapBtn = document.getElementById("MktCapButton");
         var ValueBtn = document.getElementById("ValueButton");

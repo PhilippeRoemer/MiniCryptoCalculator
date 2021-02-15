@@ -19,7 +19,7 @@ const Coin = ({ name, price, marketcap, image, ath, priceChange, chart }) => {
             {show ? (
                 <Fragment>
                     <tr className="additionalCoinData">
-                        <th></th>
+                        <th>Rank</th>
                         <th>24h</th>
                         <th>ATH</th>
                         <th>7d Chart</th>

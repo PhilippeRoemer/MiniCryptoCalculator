@@ -157,3 +157,11 @@ td {
     background-color: #45a29d1e;
     cursor: pointer;
 }
+
+.hide {
+    display: none;
+}
+
+.textCenter {
+    text-align: center;
+}
