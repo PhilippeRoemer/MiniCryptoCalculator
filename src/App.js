@@ -3,6 +3,7 @@ import axios from "axios";
 import Logo from "./CC_Logo.png";
 import Coin from "./components/Coin";
 import "./App.css";
+import "./bootstrap-grid.css";
 
 function App() {
     const [coins, setCoins] = useState([]);
@@ -65,6 +66,36 @@ function App() {
         }
     }
 
+    function marketCapShow() {
+        document.getElementById("marketCapShowDiv").style.display = "block";
+    }
+    function valueShow() {
+        document.getElementById("valueShowDiv").style.display = "block";
+    }
+    function ATHShow() {
+        document.getElementById("ATHShowDiv").style.display = "block";
+    }
+
+    function radioChecked() {
+        var MktCapBtn = document.getElementById("MktCapButton");
+        var ValueBtn = document.getElementById("ValueButton");
+        var ATHBtn = document.getElementById("ATHButton");
+
+        if (MktCapBtn.checked) {
+            document.getElementById("marketCapShowDiv").style.display = "block";
+            document.getElementById("valueShowDiv").style.display = "none";
+            document.getElementById("ATHShowDiv").style.display = "none";
+        } else if (ValueBtn.checked) {
+            document.getElementById("marketCapShowDiv").style.display = "none";
+            document.getElementById("valueShowDiv").style.display = "block";
+            document.getElementById("ATHShowDiv").style.display = "none";
+        } else if (ATHBtn.checked) {
+            document.getElementById("marketCapShowDiv").style.display = "none";
+            document.getElementById("valueShowDiv").style.display = "none";
+            document.getElementById("ATHShowDiv").style.display = "block";
+        }
+    }
+
     return (
         <div className="container">
             <img src={Logo} class="logo" />
@@ -82,7 +113,6 @@ function App() {
                     return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} />;
                 })}
             </table>
-
             {/* Select a coin */}
             <select id="crypto" className="selectCrypto">
                 <option disabled selected value>
@@ -104,50 +134,73 @@ function App() {
                     </option>
                 ))}
             </select>
-            {/* Radio Buttons */}
-            <div>
-                <input type="radio" value="Male" name="gender" /> Market Cap
-                <input type="radio" value="Female" name="gender" /> Coin Value
-                <input type="radio" value="Other" name="gender" /> ATH
+            {/* Test Radio */}
+            {/* <div>
+                <input type="radio" name="calcOption" onClick={marketCapShow} checked />
+                Market Cap
+                <input type="radio" name="calcOption" onClick={valueShow} />
+                Coin Value
+                <input type="radio" name="calcOption" onClick={ATHShow} />
+                ATH
+            </div> */}
+            <div className="row">
+                <div className="col textCenter">
+                    <input type="radio" name="calcOption" onClick={radioChecked} id="MktCapButton" />
+                    Market Cap
+                </div>
+                <div className="col textCenter">
+                    <input type="radio" name="calcOption" onClick={radioChecked} id="ValueButton" />
+                    Coin Value
+                </div>
+                <div className="col textCenter">
+                    <input type="radio" name="calcOption" onClick={radioChecked} id="ATHButton" />
+                    ATH
+                </div>
             </div>
             {/* Market Cap Div */}
-            <h2 className="title">Calculate the Market Cap</h2>
-            <div className="marketCapDiv">
-                <label for="Price">Price: </label>
-                <input type="text" className="marketCapInput" name="Price" placeholder="Insert Price" id="price" onChange={generateMktCap} />
-                <p className="marketCapInput2">X Circulating Supply</p>
-                <p className="bold">
-                    Market Cap ={" "}
-                    <span id="MktCapTotal" className="highlight">
-                        $0.00
-                    </span>
-                </p>
+            <div id="marketCapShowDiv" className="hide">
+                <h2 className="title">Calculate the Market Cap</h2>
+                <div className="marketCapDiv">
+                    <label for="Price">Price: </label>
+                    <input type="text" className="marketCapInput" name="Price" placeholder="Insert Price" id="price" onChange={generateMktCap} />
+                    <p className="marketCapInput2">X Circulating Supply</p>
+                    <p className="bold">
+                        Market Cap ={" "}
+                        <span id="MktCapTotal" className="highlight">
+                            $0.00
+                        </span>
+                    </p>
+                </div>
             </div>
-            {/* Coin Price Div */}
-            <h2 className="title">Calculate the Coin Value</h2>
-            <div className="coinPriceDiv">
-                <label for="Quantity">Quantity: </label>
-                <input type="text" className="coinAmountInput" name="Quantity" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
-                <p className="coinAmountInput2">X Current Price</p>
-                <p className="bold">
-                    Coin Value ={" "}
-                    <span id="CoinPriceTotal" className="highlight">
-                        $0.00
-                    </span>
-                </p>
+            {/* Coin Value Div */}
+            <div id="valueShowDiv" className="hide">
+                <h2 className="title">Calculate the Coin Value</h2>
+                <div className="coinPriceDiv">
+                    <label for="Quantity">Quantity: </label>
+                    <input type="text" className="coinAmountInput" name="Quantity" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
+                    <p className="coinAmountInput2">X Current Price</p>
+                    <p className="bold">
+                        Coin Value ={" "}
+                        <span id="CoinPriceTotal" className="highlight">
+                            $0.00
+                        </span>
+                    </p>
+                </div>
             </div>
             {/* ATH Div */}
-            <h2 className="title">Calculate the ATH Value</h2>
-            <div className="coinPriceDiv">
-                <label for="QuantityATH">Quantity: </label>
-                <input type="text" className="coinAmountInput" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
-                <p className="coinAmountInput2">X ATH</p>
-                <p className="bold">
-                    ATH Value ={" "}
-                    <span id="CoinATHtotal" className="highlight">
-                        $0.00
-                    </span>
-                </p>
+            <div id="ATHShowDiv" className="hide">
+                <h2 className="title">Calculate the ATH Value</h2>
+                <div className="coinPriceDiv">
+                    <label for="QuantityATH">Quantity: </label>
+                    <input type="text" className="coinAmountInput" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
+                    <p className="coinAmountInput2">X ATH</p>
+                    <p className="bold">
+                        ATH Value ={" "}
+                        <span id="CoinATHtotal" className="highlight">
+                            $0.00
+                        </span>
+                    </p>
+                </div>
             </div>
         </div>
     );
