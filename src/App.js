@@ -70,7 +70,6 @@ function App() {
         var MktCapBtn = document.getElementById("MktCapButton");
         var ValueBtn = document.getElementById("ValueButton");
         var ATHBtn = document.getElementById("ATHButton");
-
         if (MktCapBtn.checked) {
             document.getElementById("marketCapShowDiv").style.display = "block";
             document.getElementById("valueShowDiv").style.display = "none";
@@ -100,7 +99,7 @@ function App() {
                     <th>Market Cap</th>
                 </tr>
                 {coins.map((coin) => {
-                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} />;
+                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} rank={coin.market_cap_rank} />;
                 })}
             </table>
             {/* Select a coin */}

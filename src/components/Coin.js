@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import "../App.css";
 import { Sparklines, SparklinesLine } from "react-sparklines";
 
-const Coin = ({ name, price, marketcap, image, ath, priceChange, chart }) => {
+const Coin = ({ name, price, marketcap, image, ath, priceChange, chart, rank }) => {
     const [show, setShow] = useState(false);
     return (
         <Fragment>
@@ -26,7 +26,7 @@ const Coin = ({ name, price, marketcap, image, ath, priceChange, chart }) => {
                     </tr>
 
                     <tr className="additionalCoinData">
-                        <td></td>
+                        <td>{rank}</td>
                         <td> {priceChange < 0 ? <p className="red">{priceChange.toFixed(2)}%</p> : <p className="green">{priceChange.toFixed(2)}%</p>}</td>
                         <td>${ath.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}</td>
                         <td className="sparklineGraph">
