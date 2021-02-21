@@ -110,7 +110,7 @@ td {
 
 .marketCapInput {
     text-align: center;
-    width: 80px;
+    width: 100px;
     padding: 5px;
     font-size: 16px;
 }
@@ -122,7 +122,7 @@ td {
 
 .coinAmountInput {
     text-align: center;
-    width: 110px;
+    width: 125px;
     padding: 5px;
     font-size: 16px;
 }
