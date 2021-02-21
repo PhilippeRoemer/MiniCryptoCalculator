@@ -67,9 +67,11 @@ function App() {
     }
 
     function radioChecked() {
-        var MktCapBtn = document.getElementById("MktCapButton");
-        var ValueBtn = document.getElementById("ValueButton");
-        var ATHBtn = document.getElementById("ATHButton");
+        //Displays the selected div based on the radio option that's selected
+        //TODO: Simplify function
+        const MktCapBtn = document.getElementById("MktCapButton");
+        const ValueBtn = document.getElementById("ValueButton");
+        const ATHBtn = document.getElementById("ATHButton");
         if (MktCapBtn.checked) {
             document.getElementById("marketCapShowDiv").style.display = "block";
             document.getElementById("valueShowDiv").style.display = "none";
@@ -85,12 +87,18 @@ function App() {
         }
     }
 
+    function radioLoad() {
+        //Displays hidden div on load and becomes hidden once a coin option is selected
+        document.getElementById("marketCapShowDiv").style.display = "block";
+    }
+
     return (
-        <div className="container">
+        <div className="container" onLoad={radioLoad}>
             <img src={Logo} class="logo" />
             <h1 className="title">Current Crypto Market</h1>
             <br></br>
             {/* Coin Table */}
+            {/* TODO: Convert Table into responsive bootstrap rows */}
             <table>
                 <tr>
                     <th></th>
@@ -123,33 +131,25 @@ function App() {
                     </option>
                 ))}
             </select>
-            {/* Test Radio */}
-            {/* <div>
-                <input type="radio" name="calcOption" onClick={marketCapShow} checked />
-                Market Cap
-                <input type="radio" name="calcOption" onClick={valueShow} />
-                Coin Value
-                <input type="radio" name="calcOption" onClick={ATHShow} />
-                ATH
-            </div> */}
+            {/* Radio Button Options */}
             <div className="row">
                 <div className="col textCenter">
                     <input type="radio" name="calcOption" onClick={radioChecked} id="MktCapButton" />
-                    Market Cap
+                    <label for="MktCapButton">Market Cap</label>
                 </div>
                 <div className="col textCenter">
                     <input type="radio" name="calcOption" onClick={radioChecked} id="ValueButton" />
-                    Coin Value
+                    <label for="ValueButton">Coin Value</label>
                 </div>
                 <div className="col textCenter">
                     <input type="radio" name="calcOption" onClick={radioChecked} id="ATHButton" />
-                    ATH
+                    <label for="ATHButton">ATH</label>
                 </div>
             </div>
             {/* Market Cap Div */}
             <div id="marketCapShowDiv" className="hide">
                 <h2 className="title">Calculate the Market Cap</h2>
-                <div className="marketCapDiv">
+                <div className="selectedOptionDiv">
                     <label for="Price">Price: </label>
                     <input type="text" className="marketCapInput" name="Price" placeholder="Insert Price" id="price" onChange={generateMktCap} />
                     <p className="marketCapInput2">X Circulating Supply</p>
@@ -164,7 +164,7 @@ function App() {
             {/* Coin Value Div */}
             <div id="valueShowDiv" className="hide">
                 <h2 className="title">Calculate the Coin Value</h2>
-                <div className="coinPriceDiv">
+                <div className="selectedOptionDiv">
                     <label for="Quantity">Quantity: </label>
                     <input type="text" className="coinAmountInput" name="Quantity" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
                     <p className="coinAmountInput2">X Current Price</p>
@@ -179,7 +179,7 @@ function App() {
             {/* ATH Div */}
             <div id="ATHShowDiv" className="hide">
                 <h2 className="title">Calculate the ATH Value</h2>
-                <div className="coinPriceDiv">
+                <div className="selectedOptionDiv">
                     <label for="QuantityATH">Quantity: </label>
                     <input type="text" className="coinAmountInput" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
                     <p className="coinAmountInput2">X ATH</p>

@@ -33,7 +33,7 @@ label {
     padding: 10px;
     margin: auto;
     border-radius: 25px;
-    width: 385px;
+    /* width: 385px; */
 }
 
 .logo {
@@ -89,6 +89,13 @@ td {
     margin-bottom: 20px;
 }
 
+.selectedOptionDiv {
+    margin-top: 5px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* 
 .marketCapDiv {
     margin-top: 15px;
     text-align: center;
@@ -99,7 +106,7 @@ td {
     margin-top: 15px;
     text-align: center;
     margin-bottom: 35px;
-}
+} */
 
 .marketCapInput {
     text-align: center;
