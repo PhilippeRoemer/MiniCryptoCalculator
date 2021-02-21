@@ -35,7 +35,7 @@ function App() {
     }
 
     function generateCurrentPrice() {
-        //Generates the current coin value
+        //Generates the current coin USD value
         //Total Current Price = Quantity * Current Price
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
@@ -46,7 +46,22 @@ function App() {
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("CoinPriceTotal").innerHTML = "$" + coinPriceTotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("CoinPriceTotal").value = coinPriceTotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
+    }
+
+    function generateUSDValue() {
+        //Generates the amount of coins based on the USD value entered
+        //Amount = Quantity / Current Price
+        const index = document.getElementById("crypto").selectedIndex;
+        const currentPrice = document.getElementById("crypto").value;
+        const quantity = document.getElementById("CoinPriceTotal").value;
+        const coinAmount = quantity / currentPrice;
+
+        if (index <= 0) {
+            alert("Please select a cryptocurreny");
+        } else {
+            document.getElementById("cryptoAmount").value = coinAmount.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -165,15 +180,8 @@ function App() {
             <div id="valueShowDiv" className="hide">
                 <h2 className="title">Calculate the Coin Value</h2>
                 <div className="selectedOptionDiv">
-                    <label for="Quantity">Quantity: </label>
-                    <input type="text" className="coinAmountInput" name="Quantity" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
-                    <p className="coinAmountInput2">X Current Price</p>
-                    <p className="bold">
-                        Coin Value ={" "}
-                        <span id="CoinPriceTotal" className="highlight">
-                            $0.00
-                        </span>
-                    </p>
+                    <input type="text" className="coinAmountInput" placeholder="Crypto" id="cryptoAmount" onChange={generateCurrentPrice} />
+                    <input type="text" className="coinAmountInput" placeholder="USD" id="CoinPriceTotal" onChange={generateUSDValue} />
                 </div>
             </div>
             {/* ATH Div */}
