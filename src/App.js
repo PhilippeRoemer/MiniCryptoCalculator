@@ -23,14 +23,30 @@ function App() {
         //Market Cap = Circulating Supply * Price
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
-        const coinPrice = document.getElementById("price").value;
+        const coinPrice = document.getElementById("MktCapPrice").value;
         const circulatingSupply = coinData[index].dataset.circulatingsupply;
         const generatedMarketCap = coinPrice * circulatingSupply;
 
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("MktCapTotal").innerHTML = "$" + generatedMarketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("MktCapTotal").value = generatedMarketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+        }
+    }
+
+    function generateMktCapPrice() {
+        //Generates the price based off the market cap entered
+        //Price = Market Cap / Circulating Supply
+        const index = document.getElementById("crypto").selectedIndex;
+        const coinData = document.getElementById("crypto").options;
+        const mktCap = document.getElementById("MktCapTotal").value;
+        const circulatingSupply = coinData[index].dataset.circulatingsupply;
+        const generatedMarketCapPrice = mktCap / circulatingSupply;
+
+        if (index <= 0) {
+            alert("Please select a cryptocurreny");
+        } else {
+            document.getElementById("MktCapPrice").value = generatedMarketCapPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -38,7 +54,6 @@ function App() {
         //Generates the current coin USD value
         //Total Current Price = Quantity * Current Price
         const index = document.getElementById("crypto").selectedIndex;
-        const coinData = document.getElementById("crypto").options;
         const currentPrice = document.getElementById("crypto").value;
         const quantity = document.getElementById("cryptoAmount").value;
         const coinPriceTotal = currentPrice * quantity;
@@ -165,15 +180,8 @@ function App() {
             <div id="marketCapShowDiv" className="hide">
                 <h2 className="title">Calculate the Market Cap</h2>
                 <div className="selectedOptionDiv">
-                    <label for="Price">Price: </label>
-                    <input type="text" className="marketCapInput" name="Price" placeholder="Insert Price" id="price" onChange={generateMktCap} />
-                    <p className="marketCapInput2">X Circulating Supply</p>
-                    <p className="bold">
-                        Market Cap ={" "}
-                        <span id="MktCapTotal" className="highlight">
-                            $0.00
-                        </span>
-                    </p>
+                    <input type="text" className="marketCapInput" placeholder="Price" id="MktCapPrice" onChange={generateMktCap} />
+                    <input type="text" className="marketCapInput" placeholder="Market Cap" id="MktCapTotal" onChange={generateMktCapPrice} />
                 </div>
             </div>
             {/* Coin Value Div */}
