@@ -33,7 +33,6 @@ label {
     padding: 10px;
     margin: auto;
     border-radius: 25px;
-    /* width: 385px; */
 }
 
 .logo {
@@ -43,7 +42,6 @@ label {
     width: 130px;
 }
 
-/* Coin Table */
 .title {
     text-align: center;
     color: #66fcf1;
@@ -66,6 +64,10 @@ tr {
 td {
     text-align: center;
     font-size: 15px;
+}
+
+label {
+    font-size: 18px;
 }
 
 .tdMktCp {
@@ -95,41 +97,12 @@ td {
     margin-bottom: 10px;
 }
 
-/* 
-.marketCapDiv {
-    margin-top: 15px;
+.coinInputField {
     text-align: center;
-    margin-bottom: 30px;
-}
-
-.coinPriceDiv {
-    margin-top: 15px;
-    text-align: center;
-    margin-bottom: 35px;
-} */
-
-.marketCapInput {
-    text-align: center;
-    /* width: 100px; */
+    width: 90%;
     padding: 5px;
     font-size: 16px;
-}
-
-.marketCapInput2 {
-    padding: 5px;
-    display: inline-block;
-}
-
-.coinAmountInput {
-    text-align: center;
-    /* width: 125px; */
-    padding: 5px;
-    font-size: 16px;
-}
-
-.coinAmountInput2 {
-    padding: 5px;
-    display: inline-block;
+    margin-top: 2%;
 }
 
 .highlight {
@@ -171,4 +144,9 @@ td {
 
 .textCenter {
     text-align: center;
+}
+
+.calcDiv {
+    margin-top: 3%;
+    margin-bottom: 3%;
 }

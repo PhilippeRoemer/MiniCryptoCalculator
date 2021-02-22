@@ -46,7 +46,7 @@ function App() {
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("MktCapPrice").value = generatedMarketCapPrice.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("MktCapPrice").value = generatedMarketCapPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -116,6 +116,14 @@ function App() {
             document.getElementById("ATHShowDiv").style.display = "block";
         }
     }
+    function fieldReset() {
+        //Resets field values when a new dropdown option is selected
+        document.getElementById("MktCapPrice").value = "";
+        document.getElementById("MktCapTotal").value = "";
+        document.getElementById("cryptoAmount").value = "";
+        document.getElementById("CoinPriceTotal").value = "";
+        document.getElementById("cryptoAmountATH").value = "";
+    }
 
     function radioLoad() {
         //Displays hidden div on load and becomes hidden once a coin option is selected
@@ -125,23 +133,8 @@ function App() {
     return (
         <div className="container" onLoad={radioLoad}>
             <img src={Logo} class="logo" />
-            <h1 className="title">Current Crypto Market</h1>
-            <br></br>
-            {/* Coin Table */}
-            {/* TODO: Convert Table into responsive bootstrap rows */}
-            <table>
-                <tr>
-                    <th></th>
-                    <th>Coin</th>
-                    <th>Current Price</th>
-                    <th>Market Cap</th>
-                </tr>
-                {coins.map((coin) => {
-                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} rank={coin.market_cap_rank} />;
-                })}
-            </table>
             {/* Select a coin */}
-            <select id="crypto" className="selectCrypto">
+            <select id="crypto" className="selectCrypto" onChange={fieldReset}>
                 <option disabled selected value>
                     {" "}
                     -- select a coin --{" "}
@@ -177,36 +170,85 @@ function App() {
                 </div>
             </div>
             {/* Market Cap Div */}
-            <div id="marketCapShowDiv" className="hide">
+            {/* TODO: Add function to automatically add commas inside input field */}
+            <div id="marketCapShowDiv" className="hide calcDiv">
                 <h2 className="title">Calculate the Market Cap</h2>
-                <div className="selectedOptionDiv">
-                    <input type="text" className="marketCapInput" placeholder="Price" id="MktCapPrice" onChange={generateMktCap} />
-                    <input type="text" className="marketCapInput" placeholder="Market Cap" id="MktCapTotal" onChange={generateMktCapPrice} />
+                <div className="row">
+                    <div className="col textCenter">
+                        <h3>Price (USD)</h3>
+                    </div>
+                    <div className="col textCenter">
+                        <h3>Market Cap (USD)</h3>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col textCenter">
+                        <input type="text" className="coinInputField" placeholder="Crypto Price" id="MktCapPrice" onChange={generateMktCap} />
+                    </div>
+                    <div className="col textCenter">
+                        <input type="text" className="coinInputField" placeholder="Market Cap" id="MktCapTotal" onChange={generateMktCapPrice} />
+                    </div>
                 </div>
             </div>
             {/* Coin Value Div */}
-            <div id="valueShowDiv" className="hide">
+            <div id="valueShowDiv" className="hide calcDiv">
                 <h2 className="title">Calculate the Coin Value</h2>
-                <div className="selectedOptionDiv">
-                    <input type="text" className="coinAmountInput" placeholder="Crypto" id="cryptoAmount" onChange={generateCurrentPrice} />
-                    <input type="text" className="coinAmountInput" placeholder="USD" id="CoinPriceTotal" onChange={generateUSDValue} />
+                <div className="row">
+                    <div className="col textCenter">
+                        <h3>Quantity</h3>
+                    </div>
+                    <div className="col textCenter">
+                        <h3>Value (USD)</h3>
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col textCenter">
+                        <input type="text" className="coinInputField" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
+                    </div>
+                    <div className="col textCenter">
+                        {" "}
+                        <input type="text" className="coinInputField" placeholder="Value" id="CoinPriceTotal" onChange={generateUSDValue} />
+                    </div>
                 </div>
             </div>
             {/* ATH Div */}
-            <div id="ATHShowDiv" className="hide">
+            <div id="ATHShowDiv" className="hide calcDiv">
                 <h2 className="title">Calculate the ATH Value</h2>
-                <div className="selectedOptionDiv">
-                    <label for="QuantityATH">Quantity: </label>
-                    <input type="text" className="coinAmountInput" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
-                    <p className="coinAmountInput2">X ATH</p>
-                    <p className="bold">
-                        ATH Value ={" "}
+                <div className="row">
+                    <div className="col textCenter">
+                        <h3>Quantity</h3>
+                    </div>
+                    <div className="col textCenter">
+                        <h3>ATH Value</h3>
+                    </div>
+                </div>
+                <div className="row align-items-center">
+                    <div className="col textCenter">
+                        <input type="text" className="coinInputField" name="QuantityATH" placeholder="Crypto Amount" id="cryptoAmountATH" onChange={generateATH} />
+                    </div>{" "}
+                    <div className="col textCenter">
                         <span id="CoinATHtotal" className="highlight">
                             $0.00
                         </span>
-                    </p>
+                    </div>
                 </div>
             </div>
+            <br></br>
+            <h2 className="title">Current Crypto Market</h2>
+            {/* Coin Table */}
+            {/* TODO: Convert Table into responsive bootstrap rows */}
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Coin</th>
+                    <th>Current Price</th>
+                    <th>Market Cap</th>
+                </tr>
+                {coins.map((coin) => {
+                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} rank={coin.market_cap_rank} />;
+                })}
+            </table>
+            <br></br>
         </div>
     );
 }
