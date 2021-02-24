@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Logo from "./CC_Logo.png";
 import Coin from "./components/Coin";
+import NumberFormat from "react-number-format";
 import "./App.css";
 import "./bootstrap-grid.css";
 
@@ -23,14 +24,14 @@ function App() {
         //Market Cap = Circulating Supply * Price
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
-        const coinPrice = document.getElementById("MktCapPrice").value;
+        const coinPrice = document.getElementById("MktCapPrice").value.replace(/,|\$/g, "");
         const circulatingSupply = coinData[index].dataset.circulatingsupply;
         const generatedMarketCap = coinPrice * circulatingSupply;
 
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("MktCapTotal").value = generatedMarketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("MktCapTotal").value = "$" + generatedMarketCap.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -39,14 +40,14 @@ function App() {
         //Price = Market Cap / Circulating Supply
         const index = document.getElementById("crypto").selectedIndex;
         const coinData = document.getElementById("crypto").options;
-        const mktCap = document.getElementById("MktCapTotal").value;
+        const mktCap = document.getElementById("MktCapTotal").value.replace(/,|\$/g, "");
         const circulatingSupply = coinData[index].dataset.circulatingsupply;
         const generatedMarketCapPrice = mktCap / circulatingSupply;
 
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("MktCapPrice").value = generatedMarketCapPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("MktCapPrice").value = "$" + generatedMarketCapPrice.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -55,13 +56,13 @@ function App() {
         //Total Current Price = Quantity * Current Price
         const index = document.getElementById("crypto").selectedIndex;
         const currentPrice = document.getElementById("crypto").value;
-        const quantity = document.getElementById("cryptoAmount").value;
+        const quantity = document.getElementById("cryptoAmount").value.replace(/,/g, "");
         const coinPriceTotal = currentPrice * quantity;
 
         if (index <= 0) {
             alert("Please select a cryptocurreny");
         } else {
-            document.getElementById("CoinPriceTotal").value = coinPriceTotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+            document.getElementById("CoinPriceTotal").value = "$" + coinPriceTotal.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
         }
     }
 
@@ -70,7 +71,7 @@ function App() {
         //Amount = Quantity / Current Price
         const index = document.getElementById("crypto").selectedIndex;
         const currentPrice = document.getElementById("crypto").value;
-        const quantity = document.getElementById("CoinPriceTotal").value;
+        const quantity = document.getElementById("CoinPriceTotal").value.replace(/,|\$/g, "");
         const coinAmount = quantity / currentPrice;
 
         if (index <= 0) {
@@ -133,6 +134,7 @@ function App() {
     return (
         <div className="container" onLoad={radioLoad}>
             <img src={Logo} class="logo" />
+
             {/* Select a coin */}
             <select id="crypto" className="selectCrypto" onChange={fieldReset}>
                 <option disabled selected value>
@@ -183,10 +185,10 @@ function App() {
                 </div>
                 <div className="row">
                     <div className="col textCenter">
-                        <input type="text" className="coinInputField" placeholder="Crypto Price" id="MktCapPrice" onChange={generateMktCap} />
+                        <NumberFormat thousandSeparator={true} prefix={"$"} className="coinInputField" placeholder="Price" id="MktCapPrice" onChange={generateMktCap} />
                     </div>
                     <div className="col textCenter">
-                        <input type="text" className="coinInputField" placeholder="Market Cap" id="MktCapTotal" onChange={generateMktCapPrice} />
+                        <NumberFormat thousandSeparator={true} prefix={"$"} className="coinInputField" placeholder="Market Cap" id="MktCapTotal" onChange={generateMktCapPrice} />
                     </div>
                 </div>
             </div>
@@ -203,11 +205,11 @@ function App() {
                 </div>
                 <div className="row">
                     <div className="col textCenter">
-                        <input type="text" className="coinInputField" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
+                        <NumberFormat thousandSeparator={true} className="coinInputField" placeholder="Crypto Amount" id="cryptoAmount" onChange={generateCurrentPrice} />
                     </div>
                     <div className="col textCenter">
                         {" "}
-                        <input type="text" className="coinInputField" placeholder="Value" id="CoinPriceTotal" onChange={generateUSDValue} />
+                        <NumberFormat thousandSeparator={true} prefix={"$"} className="coinInputField" placeholder="Value" id="CoinPriceTotal" onChange={generateUSDValue} />
                     </div>
                 </div>
             </div>
