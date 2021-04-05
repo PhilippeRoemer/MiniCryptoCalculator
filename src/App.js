@@ -238,17 +238,21 @@ function App() {
             <h2 className="title">Current Crypto Market</h2>
             {/* Coin Table */}
             {/* TODO: Convert Table into responsive bootstrap rows */}
-            <table>
-                <tr>
-                    <th></th>
-                    <th>Coin</th>
-                    <th>Current Price</th>
-                    <th>Market Cap</th>
-                </tr>
-                {coins.map((coin) => {
-                    return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} rank={coin.market_cap_rank} />;
-                })}
-            </table>
+            {coins.length > 0 ? (
+                <table>
+                    <tr>
+                        <th></th>
+                        <th>Coin</th>
+                        <th>Current Price</th>
+                        <th>Market Cap</th>
+                    </tr>
+                    {coins.map((coin) => {
+                        return <Coin name={coin.name} price={coin.current_price} marketcap={coin.market_cap} image={coin.image} priceChange={coin.price_change_percentage_24h} ath={coin.ath} chart={coin.sparkline_in_7d.price} rank={coin.market_cap_rank} />;
+                    })}
+                </table>
+            ) : (
+                <div class="loadingRing"></div>
+            )}
             <br></br>
         </div>
     );
